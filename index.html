@@ -407,10 +407,10 @@
           <nav class="blog-pagination">
             <a class="btn btn-outline-primary" href="#">Older</a>
             <a
-              class="btn btn-outline-secondary disabled"
-              href="#"
+              class="btn btn-outline-secondary "
+              href=""
               tabindex="-1"
-              aria-disabled="true"
+              aria-disabled="false"
               >Newer</a
             >
           </nav>
@@ -492,6 +492,37 @@
         let ol = document.querySelector(".blog-sidebar > div:nth-of-type(3) > ol")
         ol.innerHTML = ""
       }
+      const changeJumbotron = function(){
+        let heading = document.querySelector(".jumbotron > div:first-of-type")
+        heading.classList.replace("col-md-6","col-12")
+      }
+      const removeSearchIcon = function(){
+        let searchIcon = document.querySelector(".blog-header > div:nth-of-type(1) > div:nth-of-type(3) > a:first-of-type")
+        searchIcon.innerHTML= ""
+      }
+      const delete50Char = function(){
+        let fPara = document.querySelectorAll(".container .row .blog-post > p:nth-of-type(2)")
+        for(let i = 0;i<fPara.length;i++){
+            let shortPara = fPara[i].innerHTML
+            fPara[i].innerHTML = shortPara.slice(50)
+        }
+      }
+      const newerButton = function(){
+        let btn = document.querySelector(".blog-pagination > a:nth-of-type(2)")
+        btn.removeAttribute("href")
+        btn.addEventListener("click",newBlogPost())
+      }
+      const newBlogPost = function(){
+          let lastSib = document.querySelector(".blog-main > :last-child")
+          let mainBlog = document.querySelector(".blog-main")
+          let newBlog = document.createElement("div")
+          newBlog.classList.add("blog-post")
+          let newBlogTitle = document.createElement("h2")
+          newBlogTitle.innerHTML = "New Blog Post"
+          newBlog.appendChild(newBlogTitle)
+          mainBlog.insertBefore(newBlog,lastSib)
+        }
+      
       /*
         JS Exercises
         EX11) Write a function to add a new link into the navbar
